@@ -1,16 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import catDataType from '../../types/catData';
 
-const SearchSection = styled.section`
+const SearchSection = styled.div`
 	width: 100%;
 	margin: 0 auto 2rem auto;
+	display: flex;
+	justify-content: center;
+`;
+
+const SearchInput = styled.div`
+	height: 1.3rem;
 	text-align: center;
 `;
 
 const Input = styled.input`
 	width: 11.5rem;
 	height: 1.3rem;
-	margin-bottom: 0.8rem;
 	padding: 0.2rem 0.8rem;
 	border: 0.15rem solid #ccc;
 	border-radius: 0.3rem;
@@ -29,14 +35,29 @@ const SearchBtn = styled.button`
 	font-style: bold;
 `;
 
+const SearchResult = styled.div`
+	width: 11.5rem;
+	height: 1.3rem;
+	padding: 0.2rem 0.8rem;
+	border: 0.1rem solid #ddd;
+	background-color: #f5f5f5;
+	cursor: pointer;
+`;
+
 interface Props {
 	searchData: (event: React.ChangeEvent<{ name?: string; value: string }>) => void;
+	searchCatList: catDataType[];
 }
 
-const SearchBar = ({ searchData }: Props) => {
+const SearchBar = ({ searchData, searchCatList }: Props) => {
 	return (
 		<SearchSection>
-			<Input onChange={searchData} placeholder="두 글자 이상 입력해주세요" />
+			<SearchInput>
+				<Input onChange={searchData} placeholder="두 글자 이상 입력해주세요" />
+				{searchCatList?.map(data => {
+					return <SearchResult>{data.name}</SearchResult>;
+				})}
+			</SearchInput>
 			<SearchBtn type="submit">Search</SearchBtn>
 		</SearchSection>
 	);

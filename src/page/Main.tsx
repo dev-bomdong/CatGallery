@@ -41,7 +41,7 @@ const Main = () => {
 	return (
 		<Container>
 			<Header title="😸 고양이 사진 갤러리 😻" />
-			<SearchBar searchData={searchData} />
+			<SearchBar searchData={searchData} searchCatList={searchCatList} />
 			<List catList={catList} />
 		</Container>
 	);
