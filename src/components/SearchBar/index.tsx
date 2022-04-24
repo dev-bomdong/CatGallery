@@ -1,17 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import catDataType from '../../types/catData';
+import { catDataType } from '../../types/catData';
 
 const SearchSection = styled.div`
 	width: 100%;
 	margin: 0 auto 2rem auto;
 	display: flex;
 	justify-content: center;
+	z-index: 300;
 `;
 
 const SearchInput = styled.div`
 	height: 1.3rem;
 	text-align: center;
+	z-index: 200;
 `;
 
 const Input = styled.input`
@@ -42,20 +44,31 @@ const SearchResult = styled.div`
 	border: 0.1rem solid #ddd;
 	background-color: #f5f5f5;
 	cursor: pointer;
+	z-index: 100;
 `;
 
 interface Props {
-	searchData: (event: React.ChangeEvent<{ name?: string; value: string }>) => void;
+	searchData: (value: string) => void;
+	searchConditionalList: (event: React.ChangeEvent<{ name?: string; value: string }>) => void;
 	searchCatList: catDataType[];
 }
 
-const SearchBar = ({ searchData, searchCatList }: Props) => {
+const SearchBar = ({ searchData, searchConditionalList, searchCatList }: Props) => {
 	return (
 		<SearchSection>
 			<SearchInput>
-				<Input onChange={searchData} placeholder="두 글자 이상 입력해주세요" />
-				{searchCatList?.map(data => {
-					return <SearchResult>{data.name}</SearchResult>;
+				<Input onChange={searchConditionalList} placeholder="두 글자 이상 입력해주세요" />
+				{searchCatList?.map((data, idx) => {
+					return (
+						<SearchResult
+							key={idx}
+							onClick={e => {
+								searchData(e.currentTarget.innerHTML);
+							}}
+						>
+							{data.name}
+						</SearchResult>
+					);
 				})}
 			</SearchInput>
 			<SearchBtn type="submit">Search</SearchBtn>

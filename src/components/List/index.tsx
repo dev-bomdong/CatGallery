@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import catDataType from '../../types/catData';
 import Card from '../Card';
+import { searchedCatType } from '../../types/catData';
 
 interface Props {
-	catList: catDataType[];
+	catList: searchedCatType[];
 }
 
 const Container = styled.section`

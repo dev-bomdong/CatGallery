@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import List from '../components/List';
-import axios from 'axios';
-import catDataType from '../types/catData';
-import styled from 'styled-components';
+import { BASE_URL } from '../config';
+import { catDataType, searchedCatType } from '../types/catData';
+import defaultCat from '../assets/image/default_cat.jpeg';
 
 const Container = styled.div`
 	margin: 0 auto;
@@ -14,34 +16,62 @@ const Container = styled.div`
 `;
 
 const Main = () => {
-	const [catList, setCatList] = useState<catDataType[]>([]);
+	const [catList, setCatList] = useState<searchedCatType[]>([]);
 	const [searchCatList, setSearchCatList] = useState<catDataType[]>([]);
-	const url = 'https://api.thecatapi.com/v1/breeds';
 
-	/** 모든 데이터 조회 */
-	const getAllData = async () => {
-		const result = await axios.get(url);
-		result.status === 200 ? setCatList(result.data) : setCatList([]);
+	const mappingValue = (list: catDataType[]) => {
+		let resultArr = [];
+		const result = list.map((data: catDataType) => {
+			return { name: data.name, image: data?.image?.url };
+		});
+		resultArr = [...result];
+		setCatList(resultArr);
 	};
 
-	/** 두글자 이상 입력시 검색*/
-	const searchData = async (event: React.ChangeEvent<{ name?: string; value: string }>) => {
+	/** 모든 데이터 조회 */
+	const getAllList = async () => {
+		const result = await axios.get(BASE_URL);
+		result.status === 200 ? mappingValue(result.data) : setCatList([]);
+	};
+
+	/** 선택한 데이터 조회*/
+	const searchData = async (value: string) => {
+		const result = await axios.get(BASE_URL + `/search?q=${value}`);
+		result.status === 200
+			? setCatList([
+					{
+						name: result.data[0].name,
+						image: defaultCat,
+					},
+			  ])
+			: setCatList([]);
+		setSearchCatList([]);
+	};
+
+	/** 두글자 이상 입력시 데이터 조회 */
+	const searchConditionalList = async (
+		event: React.ChangeEvent<{ name?: string; value: string }>,
+	) => {
 		const { value } = event.target;
 
 		if ((value as string).length >= 2) {
-			const result = await axios.get(url + `/search?q=${value}`);
+			const result = await axios.get(BASE_URL + `/search?q=${value}`);
 			result.status === 200 ? setSearchCatList(result.data) : setSearchCatList([]);
 		}
 	};
 
 	useEffect(() => {
-		getAllData();
+		getAllList();
 	}, []);
 
 	return (
 		<Container>
 			<Header title="😸 고양이 사진 갤러리 😻" />
-			<SearchBar searchData={searchData} searchCatList={searchCatList} />
+			<SearchBar
+				searchData={searchData}
+				searchConditionalList={searchConditionalList}
+				searchCatList={searchCatList}
+			/>
 			<List catList={catList} />
 		</Container>
 	);

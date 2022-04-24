@@ -1,4 +1,4 @@
-export default interface catDataType {
+export interface catDataType {
 	adaptability: number;
 	affection_level: number;
 	alt_names: string;
@@ -40,4 +40,9 @@ export default interface catDataType {
 	vocalisation: number;
 	weight: { imperial: string; metric: string };
 	wikipedia_url: string;
+}
+
+export interface searchedCatType {
+	name: string;
+	image: string;
 }

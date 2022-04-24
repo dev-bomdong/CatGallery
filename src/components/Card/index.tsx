@@ -1,9 +1,9 @@
 import React from 'react';
-import catDataType from '../../types/catData';
+import { searchedCatType } from '../../types/catData';
 import styled from 'styled-components';
 
 interface Props {
-	data: catDataType;
+	data: searchedCatType;
 }
 
 const CardContainer = styled.div`
@@ -53,7 +53,7 @@ const CardName = styled.div`
 const Card = ({ data }: Props) => {
 	return (
 		<CardContainer>
-			<CardImg src={data?.image?.url} />
+			<CardImg src={data?.image} />
 			<CardName>{data.name}</CardName>
 		</CardContainer>
 	);
