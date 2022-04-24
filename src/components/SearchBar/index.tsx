@@ -45,6 +45,11 @@ const SearchResult = styled.div`
 	background-color: #f5f5f5;
 	cursor: pointer;
 	z-index: 100;
+
+	&:hover {
+		color: dodgerblue;
+		background-color: white;
+	}
 `;
 
 interface Props {
