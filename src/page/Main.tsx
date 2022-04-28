@@ -34,7 +34,7 @@ const Main = observer(({ store }: Props) => {
 				searchConditionalList={searchConditionalList}
 				searchCatList={searchCatList}
 			/>
-			{isLoading && <Loading type="spai" color="white" message="로딩중. . 🐈" />}
+			{isLoading && <Loading color="white" message="로딩중. . 🐈" />}
 			<List catList={catList} />
 		</Container>
 	);

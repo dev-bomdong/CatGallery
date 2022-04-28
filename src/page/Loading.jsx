@@ -13,12 +13,12 @@ const TextBox = styled.div`
 	transform: translate(-50%, -50%);
 `;
 
-const Loading = ({ type, color, message }) => {
+const Loading = ({ color, message }) => {
 	return (
 		<Container>
 			<TextBox>
 				<h1>{message}</h1>
-				<ReactLoading type={type} color={color} height={'80%'} width={'80%'} />
+				<ReactLoading color={color} height="80%" width="80%" />
 			</TextBox>
 		</Container>
 	);
