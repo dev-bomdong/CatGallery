@@ -22,7 +22,7 @@ const TitleText = styled.h1`
 
 const Header = ({ title }: Props) => {
 	const refresh = () => {
-		window.location.replace('/');
+		window.location.reload();
 	};
 	return (
 		<Title>
