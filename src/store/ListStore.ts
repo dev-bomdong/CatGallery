@@ -16,7 +16,8 @@ class ListStore {
 	/** 조회된 전체 데이터 중 필요 항목 매핑 */
 	mappingValue = (list: catDataType[]) => {
 		const result = list.map((data: catDataType) => {
-			return { name: data.name, image: data?.image?.url };
+			const imageUrl = data.image?.url ? data.image.url : defaultCat;
+			return { name: data.name, image: imageUrl };
 		});
 		this.catList = [...result];
 	};
