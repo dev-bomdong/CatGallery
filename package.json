@@ -31,7 +31,7 @@
 		"predeploy": "yarn build",
 		"deploy": "gh-pages -d build"
 	},
-	"homepage": "https://dev-bomdong.github.io/CatGallery",
+	"homepage": "https://dev-bomdong.github.io/CatGallery/",
 	"eslintConfig": {
 		"extends": [
 			"react-app",
