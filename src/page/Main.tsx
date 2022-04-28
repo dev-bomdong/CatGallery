@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import List from '../components/List';
+import Loading from './Loading';
 import { ListStoreType } from '../store/ListStore';
 
 const Container = styled.div`
@@ -18,7 +19,8 @@ interface Props {
 }
 
 const Main = observer(({ store }: Props) => {
-	const { catList, searchCatList, getAllList, searchData, searchConditionalList } = store;
+	const { catList, searchCatList, isLoading, getAllList, searchData, searchConditionalList } =
+		store;
 
 	useEffect(() => {
 		getAllList();
@@ -32,6 +34,7 @@ const Main = observer(({ store }: Props) => {
 				searchConditionalList={searchConditionalList}
 				searchCatList={searchCatList}
 			/>
+			{isLoading && <Loading type="spai" color="white" message="로딩중. . 🐈" />}
 			<List catList={catList} />
 		</Container>
 	);

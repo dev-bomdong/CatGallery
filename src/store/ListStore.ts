@@ -11,6 +11,7 @@ class ListStore {
 
 	catList: searchedCatType[] = [];
 	searchCatList: catDataType[] = [];
+	isLoading: boolean = false;
 
 	/** 조회된 전체 데이터 중 필요 항목 매핑 */
 	mappingValue = (list: catDataType[]) => {
@@ -22,8 +23,10 @@ class ListStore {
 
 	/** 모든 데이터 조회 */
 	getAllList = async () => {
+		this.isLoading = true;
 		const result = await axios.get(BASE_URL);
 		result.status === 200 ? this.mappingValue(result.data) : (this.catList = []);
+		this.isLoading = false;
 	};
 
 	/** 선택한 데이터 조회*/
@@ -56,6 +59,7 @@ export default ListStore;
 export interface ListStoreType {
 	catList: searchedCatType[];
 	searchCatList: catDataType[];
+	isLoading: boolean;
 	getAllList: () => void;
 	searchData: (value: string) => void;
 	searchConditionalList: (event: React.ChangeEvent<{ name?: string; value: string }>) => void;
