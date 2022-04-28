@@ -12,6 +12,7 @@ const Container = styled.div`
 	width: 100%;
 	max-width: 1024px;
 	text-align: center;
+	border-radius: 0.5rem;
 `;
 
 interface Props {
@@ -34,7 +35,7 @@ const Main = observer(({ store }: Props) => {
 				searchConditionalList={searchConditionalList}
 				searchCatList={searchCatList}
 			/>
-			{isLoading && <Loading color="white" message="로딩중. . 🐈" />}
+			{isLoading && <Loading color="gray" message="Loading. .🐈" />}
 			<List catList={catList} />
 		</Container>
 	);

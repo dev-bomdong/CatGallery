@@ -12,6 +12,7 @@ const Container = styled.section`
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 1em;
+	background-color: white;
 `;
 
 const List = ({ catList }: Props) => {
