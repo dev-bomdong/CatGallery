@@ -9,11 +9,15 @@ const Title = styled.div`
 	width: 100%;
 	margin: 0 auto;
 	text-align: center;
+	cursor: pointer;
 `;
 
 const Header = ({ title }: Props) => {
+	const refresh = () => {
+		window.location.replace('/');
+	};
 	return (
-		<Title>
+		<Title onClick={refresh}>
 			<h1>{title}</h1>
 		</Title>
 	);
