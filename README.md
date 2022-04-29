@@ -1,6 +1,11 @@
 # Cat Gallary
 
-고양이 사진을 모아볼 수 있는 갤러리 웹앱
+## Description
+
+`2022.4.18 ~ 2022.4.29` <br />
+고양이 사진을 모아보고, 검색할 수 있는 갤러리 Web App입니다.
+
+## Tech stack
 
 <p>
   <img src="https://img.shields.io/badge/React-60DCFA?style=flat-square&logo=React&logoColor=white"/>
@@ -9,9 +14,13 @@
   <img src="https://img.shields.io/badge/styled--components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/>
 </p>
 
-## Start
+## How to Start?
 
 ```javascript
 $ yarn
 $ yarn start
 ```
+
+## Demo
+
+https://dev-bomdong.github.io/CatGallery/
